@@ -22,7 +22,9 @@ pipeline {
             steps {
                 // Run the Docker container with name and port mapping
                 script {
-                    docker.image("basic_streamlit_app").run("-d -p 8501:8501 --name my_streamlit_container")
+                    // Set the container name in an environment variable
+                    env.CONTAINER_NAME = "my_streamlit_container"
+                    docker.image("basic_streamlit_app").run("-d -p 8501:8501 --name ${env.CONTAINER_NAME}")
                 }
             }
         }

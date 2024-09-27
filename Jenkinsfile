@@ -13,7 +13,7 @@ pipeline {
             steps {
                 // Build the Docker image from the Dockerfile
                 script {
-                    docker.build("basic_streamlit_app")
+                    docker.build("test_streamlit_app")
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 // Run the Docker container with name and port mapping
                 script {
-                    docker.image("basic_streamlit_app").run("-d -p 8501:8501 --name my_streamlit_container")
+                    docker.image("test_streamlit_app").run("-p 8501:8501 --name test_streamlit_app_con")
                 }
             }
         }

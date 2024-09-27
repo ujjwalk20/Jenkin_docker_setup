@@ -20,11 +20,9 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                // Run the Docker container and capture it
+                // Run the Docker container with name and port mapping
                 script {
-                    def myContainer = docker.image("basic_streamlit_app").run("-p 8501:8501", "--name my_streamlit_container")
-                    // Save the container name for cleanup
-                    env.CONTAINER_NAME = "my_streamlit_container"
+                    docker.image("basic_streamlit_app").run("-d -p 8501:8501 --name my_streamlit_container")
                 }
             }
         }

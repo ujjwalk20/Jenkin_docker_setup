@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                // Clone the Git repository that contains the Dockerized Streamlit app
-                git url: 'https://github.com/your-username/your-repository.git', branch: 'main'
+                // Clone the repository from GitHub
+                checkout scm // Assumes GitHub repo is configured in Jenkins
             }
         }
 
@@ -20,9 +20,11 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                // Run the Docker container
+                // Run the Docker container and capture it
                 script {
-                    docker.image("basic_streamlit_app").run("-p 8501:8501")
+                    def myContainer = docker.image("basic_streamlit_app").run("-p 8501:8501", "--name my_streamlit_container")
+                    // Save the container name for cleanup
+                    env.CONTAINER_NAME = "my_streamlit_container"
                 }
             }
         }
@@ -32,9 +34,11 @@ pipeline {
         always {
             // Clean up any leftover Docker containers/images
             script {
-                def container = docker.image("basic_streamlit_app")
-                container.stop()
-                container.remove()
+                // Check if the container exists and stop/remove it
+                if (env.CONTAINER_NAME) {
+                    sh "docker stop ${env.CONTAINER_NAME} || true"
+                    sh "docker rm ${env.CONTAINER_NAME} || true"
+                }
             }
         }
     }

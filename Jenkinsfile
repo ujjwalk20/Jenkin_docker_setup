@@ -22,7 +22,7 @@ pipeline {
             steps {
                 // Run the Docker container with name and port mapping
                 script {
-                    docker.image("test_streamlit_app").run("-p 8501:8501 --name test_streamlit_app_con")
+                    docker.image("test_streamlit_app").run("-p 8501:8501")
                 }
             }
         }

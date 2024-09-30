@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image using Docker plugin
-                    dockerImage = docker.build("-t test_streamlit_app1")
+                    dockerImage = docker.build("test_streamlit_app1")
                 }
             }
         }

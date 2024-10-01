@@ -34,9 +34,7 @@ pipeline {
                 }
             }
         stage('Deploy to Kubernetes via Minikube') {
-            when {
-                success()  // Only proceed if the Docker push is successful
-            }
+        
             steps {
                 script {
                     kubernetesDeploy(

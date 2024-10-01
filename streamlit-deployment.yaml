@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: streamlit
-        image: maven0/my-streamlit-app
+        image: ujjwalk20/my-streamlit-app:v2
 
         ports:
         - containerPort: 8501

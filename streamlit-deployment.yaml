@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: streamlit
-        image: ujjwalk20/my-streamlit-app:v2
+        image: ujjwalk20/my-streamlit-app:latest
 
         ports:
         - containerPort: 8501

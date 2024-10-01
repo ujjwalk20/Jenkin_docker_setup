@@ -24,9 +24,7 @@ pipeline {
         }
 
      stage('Push Docker Image to Docker Hub') {
-                when {
-                    success()  // Only proceed if the Docker image build is successful
-                }
+               
                 steps {
                     script {
                         docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {

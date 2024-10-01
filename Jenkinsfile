@@ -5,6 +5,7 @@ pipeline {
         DOCKER_TAG = "latest"
         REPO_URL = "https://github.com/ujjwalk20/Jenkin_docker_setup.git"
     }
+
     agent any
 
     stages {
@@ -14,7 +15,7 @@ pipeline {
             }
         }
 
-         stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     // Build the Docker image using Docker plugin
@@ -23,11 +24,10 @@ pipeline {
             }
         }
 
-     stage('Push Docker Image to Docker Hub') {
-               
-                steps {
-                    script {
-                        // Use credentials for Docker Hub login
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                script {
+                    // Use credentials for Docker Hub login
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
                             // Push the Docker image to Docker Hub
@@ -36,8 +36,9 @@ pipeline {
                     }
                 }
             }
+        }
+
         stage('Deploy to Kubernetes via Minikube') {
-        
             steps {
                 script {
                     kubernetesDeploy(
@@ -55,7 +56,4 @@ pipeline {
             }
         }
     }
-
-    }
-
 }

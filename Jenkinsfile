@@ -1,7 +1,7 @@
 pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')  // Docker Hub credentials stored in Jenkins
-        DOCKER_IMAGE = "ujjwalk20/my_streamlit_app"
+        DOCKER_IMAGE = "ujjwalk20/test_minkube_app"
         DOCKER_TAG = "latest"
         REPO_URL = "https://github.com/ujjwalk20/Jenkin_docker_setup.git"
     }

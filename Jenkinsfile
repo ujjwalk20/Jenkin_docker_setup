@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     // Run the batch file for deployment
-                    bat 'deploy_minikube.bat'
+                    bat 'bat deploy_minikube.bat'
                 }
             }
         }

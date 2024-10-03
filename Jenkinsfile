@@ -38,20 +38,11 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes via Minikube') {
+         stage('Run Deployment via Batch File') {
             steps {
                 script {
-                    kubernetesDeploy(
-                        configs: 'streamlit-deployment.yaml',  // Deployment YAML file for Kubernetes
-                        kubeconfigId: 'minikube-kubeconfig',    // Jenkins kubeconfig ID for accessing Minikube
-                        enableConfigSubstitution: true
-                    )
-                    
-                    kubernetesDeploy(
-                        configs: 'streamlit-service.yaml',  // Service YAML file for Kubernetes
-                        kubeconfigId: 'minikube-kubeconfig',
-                        enableConfigSubstitution: true
-                    )
+                    // Run the batch file for deployment
+                    bat 'deploy_minikube.bat'
                 }
             }
         }
